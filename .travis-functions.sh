@@ -28,6 +28,10 @@ function script_generic
 {
 	xconfigure || return
 	$MAKE || return
+	glewinfo
+	./bin/DirectionalityIndicator &
+	sleep 10
+	kill $!
 }
 
 function install_deps_linux
@@ -72,6 +76,13 @@ function travis_install_script
 	else
 		install_deps_linux || return
 	fi
+}
+
+function travis_before_script
+{
+	export DISPLAY=:99.0
+	Xvfb "$DISPLAY" &
+	sleep 3 # give xvfb some time to start
 }
 
 function travis_script

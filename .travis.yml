@@ -31,6 +31,9 @@ install:
   - source ./.travis-functions.sh
   - travis_install_script
 
+before_script:
+  - travis_before_script
+
 script:
   - travis_script
 
