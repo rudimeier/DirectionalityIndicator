@@ -28,7 +28,6 @@ function script_generic
 {
 	xconfigure || return
 	$MAKE || return
-	glewinfo
 	./bin/DirectionalityIndicator &
 	sleep 10
 	kill $!
@@ -80,17 +79,15 @@ function travis_install_script
 
 function travis_before_script
 {
-	echo "DISPLAY before: $DISPLAY"
 	export DISPLAY=:99.0
 	if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-		ls -l /etc/init.d/xvfb
-		sudo Xvfb :99 -ac -screen 0 1024x768x8
+		sudo Xvfb :99 -ac -screen 0 1024x768x24 &
 	else
-		cat /etc/init.d/xvfb
-		/etc/init.d/xvfb start
+		Xvfb :99 -ac -screen 0 1024x768x24 &
 	fi
-	ps aux | grep -i xvfb
 	sleep 3 # give xvfb some time to start
+	glewinfo
+	true
 }
 
 function travis_script
