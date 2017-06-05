@@ -35,6 +35,11 @@ function install_deps_linux
 	# install some packages from Ubuntu's default sources
 	sudo apt-get -qq update
 
+	sudo apt-get install -qq \
+		libglew-dev \
+		glew-utils \
+		|| return
+
 	if test "$USE_QT" = "qt4"; then
 		sudo apt-get install -qq \
 			libqt4-dev \
@@ -52,6 +57,7 @@ function install_deps_osx
 {
 	brew update >/dev/null
 	brew install \
+		glew \
 		qt5 \
 		|| return
 
