@@ -63,12 +63,13 @@ function install_deps_osx
 	brew update >/dev/null
 	brew install \
 		glew \
+		qt@5.5 \
 		|| return
 
-	curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/fdfc724dd532345f5c6cdf47dc43e99654e6a5fd/Formula/qt5.rb
-	brew install ./qt5.rb
+	#curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/fdfc724dd532345f5c6cdf47dc43e99654e6a5fd/Formula/qt5.rb
+	#brew install ./qt5.rb
 
-	QT_DIR=$(brew --prefix qt5)
+	QT_DIR=$(brew --prefix qt@5.5)
 	PATH="$QT_DIR/bin:$PATH"
 }
 
