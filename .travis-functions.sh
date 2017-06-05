@@ -80,8 +80,16 @@ function travis_install_script
 
 function travis_before_script
 {
+	echo "DISPLAY before: $DISPLAY"
 	export DISPLAY=:99.0
-	Xvfb "$DISPLAY" &
+	if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+		ls -l /etc/init.d/xvfb
+		sudo Xvfb :99 -ac -screen 0 1024x768x8
+	else
+		cat /etc/init.d/xvfb
+		/etc/init.d/xvfb start
+	fi
+	ps aux | grep -i xvfb
 	sleep 3 # give xvfb some time to start
 }
 
