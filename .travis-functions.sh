@@ -14,6 +14,10 @@ fi
 # some config settings
 MAKE="make -j2"
 
+# workaround ugly warning on travis OSX,
+# see https://github.com/direnv/direnv/issues/210
+shell_session_update() { :; }
+
 function xconfigure
 {
 	local CMAKEOPT
