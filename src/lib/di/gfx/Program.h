@@ -226,6 +226,47 @@ namespace di
             }
 
             /**
+             * Set the given value to the specified uniform.
+             *
+             * \param name the name of the uniform
+             * \param value the value to set
+             *
+             * \return true if successful
+             */
+            void setUniform( const std::string name, const glm::dvec4& value )
+            {
+                // get location
+                glUniform4dv( getUniformLocation( name ), 1, glm::value_ptr( value ) );
+                logGLError();
+            }
+
+            /**
+             * Set the given value to the specified uniform.
+             *
+             * \param name the name of the uniform
+             * \param value the value to set
+             */
+            void setUniform( const std::string name, const glm::dvec3& value )
+            {
+                // get location
+                glUniform3dv( getUniformLocation( name ), 1, glm::value_ptr( value ) );
+                logGLError();
+            }
+
+            /**
+             * Set the given value to the specified uniform.
+             *
+             * \param name the name of the uniform
+             * \param value the value to set
+             */
+            void setUniform( const std::string name, const glm::dvec2& value )
+            {
+                // get location
+                glUniform2dv( getUniformLocation( name ), 1, glm::value_ptr( value ) );
+                logGLError();
+            }
+
+            /**
              * Set the given value to the specified uniform. This version expects the vector to be adequately sized.
              *
              * \param name the name of the uniform
